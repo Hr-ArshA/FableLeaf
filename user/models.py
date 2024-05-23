@@ -14,6 +14,7 @@ class CustomUser(AbstractUser):
     last_name = models.CharField(max_length=256)
     phone_number = models.CharField(max_length=20)
     profile_photo = models.ImageField(verbose_name='profile photo', upload_to=upload_img_path)
+    bio = models.CharField(max_length=512)
     
 
     class Meta:
