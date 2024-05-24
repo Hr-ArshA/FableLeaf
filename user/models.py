@@ -15,14 +15,22 @@ class CustomUser(AbstractUser):
     phone_number = models.CharField(max_length=20)
     profile_photo = models.ImageField(verbose_name='profile photo', upload_to=upload_img_path)
     bio = models.CharField(max_length=512)
-    
+    verified = models.BooleanField(default=False)
+    last_seen = models.DateTimeField(default=timezone.now)
+    last_seen_show = models.BooleanField(default=True)  
 
     class Meta:
         verbose_name = _("User")
         verbose_name_plural = _("Users")
 
     def __str__(self):
-        return self.first_name
+        return self.first_name if self.first_name != '' else self.username
 
     def get_absolute_url(self):
         return reverse("USer_detail", kwargs={"pk": self.pk})
+    
+    def get_last_seen(self):
+        if self.last_seen_show == False:
+            return "last seen recently"
+        else:
+            return self.last_seen

@@ -42,7 +42,8 @@ INSTALLED_APPS = [
 
     'extention',
 
-    'user',
+    'user.apps.UserConfig',
+    'chat.apps.ChatConfig',
 ]
 
 MIDDLEWARE = [
